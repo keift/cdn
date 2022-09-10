@@ -3,7 +3,7 @@
   
   Use This Script:
     <script src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/gh/paiode/cdn/getip52cd9cf8.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/plevna/cdn/getip52cd9cf8.js"></script>
   
   Example Usage:
     console.log("Your IP address: " + getIP());
