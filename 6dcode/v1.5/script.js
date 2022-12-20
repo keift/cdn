@@ -35,7 +35,7 @@ function startTimer(value) {
     $("#timer").text("Please wait for " + value + " seconds");
     value--;
     setTimeout(() => {
-      if (value === 0) return $("#timer").css({"display": "none"});
+      if (value === 0) return;
       count();
     }, 1000)
   }
@@ -66,6 +66,7 @@ $(function() {
         blinkTitle("Your 6 Digit Code: " + base64.decode(searchParams.get("code")));
         $("#code").text(base64.decode(searchParams.get("code")));
         $("#code").css({"user-select": "auto"});
+        $("#timer").css({"display": "none"});
       }, 5000)
     }
   }
