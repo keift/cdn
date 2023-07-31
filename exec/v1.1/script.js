@@ -18,6 +18,8 @@ var addresses = [
   "//blacklist-83nsd18sp.glitch.me",
   "//quick-nextjs-project.glitch.me",
   
+  "//aec5fcab6c7ba4a6.glitch.me?name=uptimebot",
+  
   "//584e64b01969c1c0.glitch.me?name=craftnex_bot",
   "//b5efcbe4fdf47bf3.glitch.me?name=paiode_bot",
   "//i9ejr3mv90cos0qq.glitch.me?name=tellony",
@@ -33,7 +35,6 @@ var addresses = [
   "//tnakjg0t8qkbclol.glitch.me?name=fir4tozden",
   "//n3045g4pxw9hn3bk.glitch.me?name=pofier",
   "//9d3713e30035c8f6.glitch.me?name=baymax_mc",
-  "//ai-mc.glitch.me?name=minecraft_ai",
   "//h9kbuh266iwd6tmb.glitch.me?name=ahmetin_botu",
   "//hisar.glitch.me?name=erenin_botu",
   "//alert-wooden-hare.glitch.me?name=ercanin_botu"
