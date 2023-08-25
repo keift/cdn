@@ -53,8 +53,10 @@ function ping() {
     
     fetch(addresses[i]).then(async response => {
       document.querySelector("#address--" + i).innerHTML = "SUCCESS: " + response.status;
+      document.querySelector("#address--" + i).setAttribute("style", "color: #008000");
     }).catch(err => {
       document.querySelector("#address--" + i).innerHTML = "ERROR: ??";
+      document.querySelector("#address--" + i).setAttribute("style", "color: #FF0000");
     })
   }
 };
