@@ -41,7 +41,16 @@ var addresses = [
 ];
 
 function ping() {
-  for (let i = 0;i < addresses.length;i++) fetch(addresses[i]);
+  for (let i = 0;i < addresses.length;i++) {
+    fetch(addresses[i]).then(await response => {
+      document.querySelector("#responses").innerHTML = `
+        ${document.querySelector("#responses").innerHTML}
+        <div>
+          <span>${addresses[i]} - ${response.status}</span>
+        </div>
+      `
+    })
+  }
 };
 
 ping();
