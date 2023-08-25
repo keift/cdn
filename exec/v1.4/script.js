@@ -54,6 +54,6 @@ function ping() {
   }
 };
 
-(ping())();
+window.onload = ping();
 
 setInterval(ping, 60000);
