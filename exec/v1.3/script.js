@@ -41,8 +41,9 @@ var addresses = [
 ];
 
 function ping() {
+  document.querySelector("#responses").innerHTML = "";
   for (let i = 0;i < addresses.length;i++) {
-    fetch(addresses[i]).then(await response => {
+    fetch(addresses[i]).then(async response => {
       document.querySelector("#responses").innerHTML = `
         ${document.querySelector("#responses").innerHTML}
         <div>
