@@ -41,13 +41,29 @@ var addresses = [
 ];
 let timestamp = Date.now();
 
+function maskURL(url) {
+  let splitted_url = url.split(".");
+  let masked_url = "";
+  
+  if (splitted_url.length === 2) {
+    masked_url += splitted_url[0].split("//")[0] + "//" + splitted_url[0].split("//")[1].substr(0, splitted_url[0].split("//")[1].length / 2) + "*".repeat(splitted_url[0].split("//")[1].length / 2);
+    masked_url += "." + splitted_url[1];
+  } else if (splitted_url.length === 3) {
+    masked_url += splitted_url[0].split("//")[0] + "//" + splitted_url[0].split("//")[1].substr(0, splitted_url[0].split("//")[1].length / 2) + "*".repeat(splitted_url[0].split("//")[1].length / 2);
+    masked_url += "." + splitted_url[1].substr(0, splitted_url[1].length / 2) + "*".repeat(splitted_url[1].length / 2);
+    masked_url += "." + splitted_url[2];
+  } else return splitted_url.join(".");
+  
+  return masked_url;
+};
+
 function ping() {
   document.querySelector("#responses").innerHTML = "";
   for (let i = 0;i < addresses.length;i++) {
     document.querySelector("#responses").innerHTML = `
       ${document.querySelector("#responses").innerHTML}
       <div>
-        <a href="${addresses[i]}">${addresses[i]}</a><span style="color: #808080"> - </span><span id="address--${i}" style="color: #FFA500">PENDING: --</span>
+        <a href="${addresses[i]}">${maskURL(addresses[i])}</a><span style="color: #808080"> - </span><span id="address--${i}" style="color: #FFA500">PENDING: --</span>
       </div>
     `
     
