@@ -54,6 +54,6 @@ function ping() {
   }
 };
 
-ping();
+(ping())();
 
 setInterval(ping, 60000);
