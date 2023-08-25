@@ -47,14 +47,14 @@ function ping() {
     document.querySelector("#responses").innerHTML = `
       ${document.querySelector("#responses").innerHTML}
       <div>
-        <span>${addresses[i]} - </span><span id="${i}" style="color: #FFA500">PENDING: --</span>
+        <a href="${addresses[i]}">${addresses[i]} - </a><span id="address--${i}" style="color: #FFA500">PENDING: --</span>
       </div>
     `
     
     fetch(addresses[i]).then(async response => {
-      document.querySelector("#" + i).innerHTML = "SUCCESS: " + response.status;
+      document.querySelector("#address--" + i).innerHTML = "SUCCESS: " + response.status;
     }).catch(err => {
-      document.querySelector("#" + i).innerHTML = "ERROR: ??";
+      document.querySelector("#address--" + i).innerHTML = "ERROR: ??";
     })
   }
 };
