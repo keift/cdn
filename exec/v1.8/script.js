@@ -39,6 +39,7 @@ var addresses = [
   "//hisar.glitch.me?name=erenin_botu",
   "//alert-wooden-hare.glitch.me?name=ercanin_botu"
 ];
+let timestamp = Date.now();
 
 function ping() {
   document.querySelector("#responses").innerHTML = "";
@@ -54,9 +55,17 @@ function ping() {
       document.querySelector("#responses").innerHTML = `
         ${document.querySelector("#responses").innerHTML}
         <div>
-          <span>${addresses[i]} - </span><span style="color: #FF0000">${response.status}</span>
+          <span>${addresses[i]} - </span><span style="color: #FF0000">ERR</span>
         </div>
       `
     })
   }
 };
+
+setTimeout(ping, 5000);
+
+setInterval(() => {
+  document.querySelector("#uptime").innerHTML = Date.now() - timestamp;
+}, 1000)
+
+setInterval(ping, 60000);
