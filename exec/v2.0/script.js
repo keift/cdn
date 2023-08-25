@@ -43,14 +43,13 @@ let timestamp = Date.now();
 
 function ping() {
   document.querySelector("#responses").innerHTML = "";
-  for (let i = 0;i < addresses.length;i++) {
-    document.querySelector("#responses").innerHTML = addresses.map(address => {
-      `
-        <div>
-          <span>${addresses[i]} - </span><span id="${i}" style="color: #FFA500">PENDING: --</span>
-        </div>
-      `
-    })
+  for (let i = 0;i < addresses.length;i++) {,
+    document.querySelector("#responses").innerHTML = `
+      ${document.querySelector("#responses").innerHTML}
+      <div>
+        <span>${addresses[i]} - </span><span id="${i}" style="color: #FFA500">PENDING: --</span>
+      </div>
+    `
     
     fetch(addresses[i]).then(async response => {
       document.querySelector("#" + i).innerHTML = "SUCCESS: " + response.status;
