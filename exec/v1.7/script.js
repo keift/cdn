@@ -46,17 +46,17 @@ function ping() {
     fetch(addresses[i]).then(async response => {
       document.querySelector("#responses").innerHTML = `
         ${document.querySelector("#responses").innerHTML}
-        <span>${addresses[i]} - ${response.status}</span>
+        <div>
+          <span>${addresses[i]} - </span><span style="color: #008000">${response.status}</span>
+        </div>
       `
     }).catch(err => {
       document.querySelector("#responses").innerHTML = `
         ${document.querySelector("#responses").innerHTML}
-        <span>${addresses[i]} - ${err.response.status}</span>
+        <div>
+          <span>${addresses[i]} - </span><span style="color: #FF0000">${response.status}</span>
+        </div>
       `
     })
   }
 };
-
-window.onload = ping();
-
-setInterval(ping, 60000);
