@@ -46,9 +46,12 @@ function ping() {
     fetch(addresses[i]).then(async response => {
       document.querySelector("#responses").innerHTML = `
         ${document.querySelector("#responses").innerHTML}
-        <div>
-          <span>${addresses[i]} - ${response.status}</span>
-        </div>
+        <span>${addresses[i]} - ${response.status}</span>
+      `
+    }).catch(err => {
+      document.querySelector("#responses").innerHTML = `
+        ${document.querySelector("#responses").innerHTML}
+        <span>${addresses[i]} - ${err.response.status}</span>
       `
     })
   }
