@@ -41,6 +41,33 @@ var addresses = [
 ];
 let timestamp = Date.now();
 
+function timeFormat(input_seconds) {
+  let years = Math.floor(input_seconds / (3600 * 24 * 365));
+  input_seconds %= 3600 * 24 * 365;
+
+  let months = Math.floor(input_seconds / (3600 * 24 * 30));
+  input_seconds %= 3600 * 24 * 30;
+
+  let days = Math.floor(input_seconds / (3600 * 24));
+  input_seconds %= 3600 * 24;
+
+  let hours = Math.floor(input_seconds / 3600);
+  input_seconds %= 3600;
+
+  let minutes = Math.floor(input_seconds / 60);
+  let seconds = input_seconds % 60;
+
+  let timeUnits = [];
+  if (years > 0) time_units.push(years + " yıl");
+  if (months > 0) time_units.push(months + " ay");
+  if (days > 0) time_units.push(days + " gün");
+  if (hours > 0) time_units.push(hours + " saat");
+  if (minutes > 0) time_units.push(minutes + " dakika");
+  if (seconds > 0) time_units.push(seconds + " saniye");
+
+  return time_units.join(", ");
+};
+
 function maskURL(url) {
   let splitted_url = url.split(".");
   let masked_url = "";
@@ -80,7 +107,7 @@ function ping() {
 setTimeout(ping, 5000);
 
 setInterval(() => {
-  document.querySelector("#uptime").innerHTML = parseInt((Date.now() - timestamp) / 1000);
+  document.querySelector("#uptime").innerHTML = timeFormat(parseInt((Date.now() - timestamp) / 1000));
 }, 250)
 
 setInterval(ping, 60000);
