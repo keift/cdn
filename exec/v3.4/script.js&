@@ -81,6 +81,6 @@ setTimeout(ping, 5000);
 
 setInterval(() => {
   document.querySelector("#uptime").innerHTML = Date.now() - timestamp;
-}, 500)
+}, 250)
 
 setInterval(ping, 60000);
