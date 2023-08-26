@@ -80,7 +80,7 @@ function ping() {
 setTimeout(ping, 5000);
 
 setInterval(() => {
-  document.querySelector("#uptime").innerHTML = (Date.now() - timestamp) / 1000;
+  document.querySelector("#uptime").innerHTML = parseInt((Date.now() - timestamp) / 1000);
 }, 250)
 
 setInterval(ping, 60000);
