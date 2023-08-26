@@ -90,7 +90,7 @@ function ping() {
     document.querySelector("#responses").innerHTML = `
       ${document.querySelector("#responses").innerHTML}
       <div>
-        <a href="${addresses[i]}">${maskURL(addresses[i])}</a><span style="color: #808080"> - </span><span id="address--${i}" style="color: #FFA500">PENDING: --</span>
+        <span>${maskURL(addresses[i])}</span><span style="color: #808080"> - </span><span id="address--${i}" style="color: #FFA500">PENDING: --</span>
       </div>
     `
     
