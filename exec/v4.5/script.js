@@ -58,12 +58,12 @@ function timeFormat(input_seconds) {
   let seconds = input_seconds % 60;
 
   let timeUnits = [];
-  if (years > 0) time_units.push(years + " yıl");
-  if (months > 0) time_units.push(months + " ay");
-  if (days > 0) time_units.push(days + " gün");
-  if (hours > 0) time_units.push(hours + " saat");
-  if (minutes > 0) time_units.push(minutes + " dakika");
-  if (seconds > 0) time_units.push(seconds + " saniye");
+  if (years > 0) time_units.push(years + " yr");
+  if (months > 0) time_units.push(months + " mo");
+  if (days > 0) time_units.push(days + " dy");
+  if (hours > 0) time_units.push(hours + " hr");
+  if (minutes > 0) time_units.push(minutes + " mn");
+  if (seconds > 0) time_units.push(seconds + " sc");
 
   return time_units.join(", ");
 };
