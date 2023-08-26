@@ -57,7 +57,7 @@ function timeFormat(input_seconds) {
   let minutes = Math.floor(input_seconds / 60);
   let seconds = input_seconds % 60;
 
-  let timeUnits = [];
+  let time_units = [];
   if (years > 0) time_units.push(years + " yr");
   if (months > 0) time_units.push(months + " mo");
   if (days > 0) time_units.push(days + " dy");
