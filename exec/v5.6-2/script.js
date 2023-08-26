@@ -98,7 +98,7 @@ function ping() {
       document.querySelector("#address--" + i).innerHTML = "SUCCESS: " + response.status;
       document.querySelector("#address--" + i).setAttribute("style", "color: #008000");
     }).catch(err => {
-      document.querySelector("#address--" + i).innerHTML = "ERROR: " + err.response.status || "??";
+      document.querySelector("#address--" + i).innerHTML = "ERROR: " + err.response?.status || "??";
       document.querySelector("#address--" + i).setAttribute("style", "color: #FF0000");
     })
   }
