@@ -45,8 +45,8 @@ function timeFormat(input_seconds) {
   let years = Math.floor(input_seconds / (3600 * 24 * 365));
   input_seconds %= 3600 * 24 * 365;
 
-  let months = Math.floor(input_seconds / (3600 * 24 * 30));
-  input_seconds %= 3600 * 24 * 30;
+  let months = Math.floor(input_seconds / (3600 * 24 * 28));
+  input_seconds %= 3600 * 24 * 28;
 
   let days = Math.floor(input_seconds / (3600 * 24));
   input_seconds %= 3600 * 24;
@@ -58,12 +58,12 @@ function timeFormat(input_seconds) {
   let seconds = input_seconds % 60;
 
   let time_units = [];
-  if (years > 0) time_units.push(years + " yr");
-  if (months > 0) time_units.push(months + " mo");
-  if (days > 0) time_units.push(days + " dy");
-  if (hours > 0) time_units.push(hours + " hr");
-  if (minutes > 0) time_units.push(minutes + " mn");
-  if (seconds > 0) time_units.push(seconds + " sc");
+  if (years > 0) time_units.push(years + " y");
+  if (months > 0) time_units.push(months + " m");
+  if (days > 0) time_units.push(days + " d");
+  if (hours > 0) time_units.push(hours + " h");
+  if (minutes > 0) time_units.push(minutes + " m");
+  if (seconds > 0) time_units.push(seconds + " s");
 
   return time_units.join(", ");
 };
