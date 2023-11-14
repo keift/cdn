@@ -7,7 +7,8 @@ var info = document.querySelector("#info");
 var title_interval;
 var title_timeout;
 
-btoa = value => btoa(value).split("=").join("");
+var b64encode = value => btoa(value).split("=").join("");
+var b64decode = value => atob(value);
 
 function generateRandomBuffer(size) {
   let buffer = new Uint8Array(size);
@@ -51,5 +52,5 @@ function startTimer(seconds) {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#cookieChoiceInfo")?.remove();
   
-  history.pushState("", "", "/redirection?token=" + btoa(generateRandomBuffer(256)));
+  history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
 });
