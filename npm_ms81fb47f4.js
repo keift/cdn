@@ -3,7 +3,7 @@
   
   Use This Script:
     <script src="//cdn.jsdelivr.net/npm/ms/index.js"></script>
-    <script src="//cdn.jsdelivr.net/gh/paiode/cdn/npm_ms81fb47f4.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/keift/cdn/npm_ms81fb47f4.js"></script>
   
   Example Usage:
     console.log("1 day is " + ms("1d") + " milliseconds");
