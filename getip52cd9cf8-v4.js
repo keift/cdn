@@ -11,7 +11,7 @@
 var __ip_addr = "0.0.0.0";
 
 function __updateIPADDR() {
-  fetch("//httpbin.org/ip").then(response => {
+  fetch("//httpbin.org/ip").then(async response => {
     let data = await response.json();
     __ip_addr = data.origin;
   })
