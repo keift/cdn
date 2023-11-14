@@ -7,6 +7,8 @@ var info = document.querySelector("#info");
 var title_interval;
 var title_timeout;
 
+btoa = value => btoa(value).split("=").join("");
+
 function generateRandomBuffer(size) {
   let buffer = new Uint8Array(size);
   crypto.getRandomValues(buffer);
