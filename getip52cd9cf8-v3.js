@@ -8,7 +8,7 @@
     console.log("Your IP address: " + __ip_addr);
 */
 
-var __ip_addr = "0.0.0.0";
+var global.__ip_addr = "0.0.0.0";
 
 function __updateIPADDR() {
   fetch("//httpbin.org/ip").then(response => {
