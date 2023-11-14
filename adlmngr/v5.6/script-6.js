@@ -49,5 +49,5 @@ function startTimer(seconds) {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#cookieChoiceInfo").remove();
   
-  history.pushState("", "", "/redirection?token=" + base64.encode(generateRandomBuffer(256)));
+  history.pushState("", "", "/redirection?token=" + btoa(generateRandomBuffer(256)));
 });
