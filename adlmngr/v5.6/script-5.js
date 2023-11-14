@@ -47,5 +47,7 @@ function startTimer(seconds) {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  history.pushState("", "", "/?redirection_code=" + base64.encode(generateRandomBuffer(256)));
+  document.querySelector("#cookieChoiceInfo").remove();
+  
+  history.pushState("", "", "/redirection?token=" + base64.encode(generateRandomBuffer(256)));
 });
