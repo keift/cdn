@@ -1,6 +1,6 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || {};
-var redirection_code = atob(search_params.get("redirection_code"));
+var token = search_params.get("token");
 
 var info = document.querySelector("#info");
 
