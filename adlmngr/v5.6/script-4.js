@@ -46,3 +46,6 @@ function startTimer(seconds) {
   count();
 };
 
+document.addEventListener("DOMContentLoaded", () => {
+  history.pushState("", "", "/?redirection_code=" + base64.encode(generateRandomBuffer(256)));
+});
