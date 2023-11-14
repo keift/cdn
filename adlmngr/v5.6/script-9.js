@@ -47,7 +47,7 @@ function startTimer(seconds) {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#cookieChoiceInfo").remove();
+  document.querySelector("#cookieChoiceInfo")?.remove();
   
   history.pushState("", "", "/redirection?token=" + btoa(generateRandomBuffer(256)));
 });
