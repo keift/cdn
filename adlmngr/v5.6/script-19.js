@@ -54,6 +54,9 @@ function startTimer(seconds) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  document.title = "Please wait...";
+  info.innerText = "Please wait...";
+  
   document.querySelector("#cookieChoiceInfo")?.remove();
   
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
@@ -73,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.innerText = "Error Redirection Token";
     return;
   }
-  let data_id = JSON.stringify(data);
+  let data_id = await SHA256(JSON.stringify(data));
 
   console.log({_id: data_id, data});
 });
