@@ -80,11 +80,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
-
+    
+    
     if (verify === true) {
-      for (let i = 0;i < referral_links.length;i++) {
-        
-      }
+      
     }
     
   } catch(err) {
