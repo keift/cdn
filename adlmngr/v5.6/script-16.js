@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let data;
   
   try {
-    data = base64.decode(token);
+    data = b64decode(token);
   } catch(err) {
     blinkTitle("Error Redirection Token");
     info.innerText = "Error Redirection Token";
