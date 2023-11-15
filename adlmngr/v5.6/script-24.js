@@ -1,5 +1,5 @@
 var search_params = new URLSearchParams(location.search);
-var links = JSON.parse(localStorage.getItem("links")) || [];
+var timeouts = JSON.parse(localStorage.getItem("timeouts")) || [];
 var token = search_params.get("token");
 
 var title_interval;
@@ -53,13 +53,22 @@ function startTimer(seconds, callback) {
   count();
 };
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 document.addEventListener("DOMContentLoaded", async () => {
   var info = document.querySelector("#info");
   document.title = "Please wait...";
   info.innerText = "Please wait...";
+
+  for (let i = 0;i < timeouts.length;i++) if (timeouts[i].util < Date.now()) timeouts.splice(i, 1);
+  localStorage.setItem("timeouts", JSON.stringify(timeouts));
   
   document.querySelector("#cookieChoiceInfo")?.remove();
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
+
+  await sleep(1000);
   
   if (!token) {
     blinkTitle("Error Redirection Token");
@@ -68,14 +77,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   try {
-    let data = JSON.parse(b64decode(token));
-    let data_id = await SHA256(JSON.stringify(data));
-    let link = links.find(link => link._id === data_id);
+    let { verify, ad_links, original_link } = JSON.parse(b64decode(token));
 
-    startTimer(5, () => {
-      document.title = "Redirecting...";
-      info.innerText = "Redirecting...";
-    })
+    if (verify === true) {
+      for (let i = 0;i < ad_links.length;i++) {
+        
+      }
+    }
+    
   } catch(err) {
     blinkTitle("Error Redirection Token");
     info.innerText = "Error Redirection Token";
