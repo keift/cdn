@@ -1,5 +1,5 @@
 var search_params = new URLSearchParams(location.search);
-var links = JSON.parse(localStorage.getItem("links")) || {};
+var links = JSON.parse(localStorage.getItem("links")) || [];
 var token = search_params.get("token");
 
 var title_interval;
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     let data = JSON.parse(b64decode(token));
     let data_id = await SHA256(JSON.stringify(data));
-    let link = links.find(link => link._id === data_id) || null;
+    let link = links.find(link => link._id === data_id);
 
     startTimer(5, () => {
       document.title = "Redirecting...";
