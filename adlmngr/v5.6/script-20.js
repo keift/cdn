@@ -54,13 +54,12 @@ function startTimer(seconds) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  var info = document.querySelector("#info");
   document.title = "Please wait...";
   info.innerText = "Please wait...";
   
   document.querySelector("#cookieChoiceInfo")?.remove();
-  
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
-  var info = document.querySelector("#info");
   
   if (!token) {
     blinkTitle("Error Redirection Token");
