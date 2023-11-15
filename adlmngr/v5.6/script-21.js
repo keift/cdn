@@ -26,24 +26,24 @@ async function SHA256(data) {
   return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join("");
 };
 
-function blinkTitle(value) {
+function blinkTitle(title) {
   clearInterval(title_interval);
   clearTimeout(title_timeout);
   
-  document.title = value;
+  document.title = title;
   title_interval = setInterval(() => {
-    document.title = value;
+    document.title = title;
     title_timeout = setTimeout(() => document.title = "Ad Link Manager", 2000);
   }, 4000)
 };
 
-function startTimer(seconds) {
+function startTimer(seconds, callback) {
   function count() {
     document.title = "Please wait for " + seconds + " seconds";
     info.innerText = "Please wait for " + seconds + " seconds";
     seconds--;
     setTimeout(() => {
-      if (seconds === 0) return;
+      if (seconds === 0) return callback();
       count();
     }, 1000)
   }
@@ -66,16 +66,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.innerText = "Error Redirection Token";
     return;
   }
-  let data;
   
   try {
-    data = JSON.parse(b64decode(token));
+    let data = JSON.parse(b64decode(token));
+    let data_id = await SHA256(JSON.stringify(data));
+    let link = links.find(link => link._id === data_id);
+
+    startTimer(5, () => {
+      document.title = "Redirecting...";
+      info.innerText = "Redirecting...";
+    })
   } catch(err) {
     blinkTitle("Error Redirection Token");
     info.innerText = "Error Redirection Token";
     return;
   }
-  let data_id = await SHA256(JSON.stringify(data));
-
-  console.log({_id: data_id, data});
 });
