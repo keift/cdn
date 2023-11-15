@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     let data = JSON.parse(b64decode(token));
     let data_id = await SHA256(JSON.stringify(data));
-    let link = links.find(link => link._id === data_id);
+    let link = links.find(link => link._id === data_id) || null;
 
     startTimer(5, () => {
       document.title = "Redirecting...";
