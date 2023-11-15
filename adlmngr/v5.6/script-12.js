@@ -1,6 +1,5 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || {};
-var token = search_params.get("token");
 
 var info = document.querySelector("#info");
 
@@ -53,4 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#cookieChoiceInfo")?.remove();
   
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
+  
+  if (!search_params.get("token")) {
+    blinkTitle("Error Redirection Token");
+    info.innerText = "Error Redirection Token";
+    return;
+  }
+  let data;
+  
+  try {
+    data = base64.decode(search_params.get("token"));
+  } catch(err) {
+    blinkTitle("Error Redirection Token");
+    info.innerText = "Error Redirection Token";
+    return;
+  }
+  
+  console.log(data)
 });
