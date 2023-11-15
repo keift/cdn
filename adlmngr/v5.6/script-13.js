@@ -1,8 +1,6 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || {};
 
-var info = document.querySelector("#info");
-
 var title_interval;
 var title_timeout;
 
@@ -52,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("#cookieChoiceInfo")?.remove();
   
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
+  var info = document.querySelector("#info");
   
   if (!search_params.get("token")) {
     blinkTitle("Error Redirection Token");
