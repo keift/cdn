@@ -1,5 +1,5 @@
 var search_params = new URLSearchParams(location.search);
-var timeouts = JSON.parse(localStorage.getItem("timeouts")) || {};
+var links = JSON.parse(localStorage.getItem("links")) || {};
 var token = search_params.get("token");
 
 var title_interval;
@@ -18,6 +18,12 @@ function generateRandomHex(size) {
   let buffer = new Uint8Array(size);
   crypto.getRandomValues(buffer);
   return Array.from(buffer).map(byte => byte.toString(16).padStart(2, "0")).join("");
+};
+
+async function SHA256(data) {
+  let encoder = new TextEncoder();
+  let uint8_data = encoder.encode(data);
+  return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join("");
 };
 
 function blinkTitle(value) {
@@ -47,7 +53,7 @@ function startTimer(seconds) {
   count();
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector("#cookieChoiceInfo")?.remove();
   
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
@@ -61,12 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let data;
   
   try {
-    data = b64decode(token);
+    data = JSON.parse(b64decode(token));
   } catch(err) {
     blinkTitle("Error Redirection Token");
     info.innerText = "Error Redirection Token";
     return;
   }
-  
-  console.log(data)
+  let data_id = JSON.stringify(data);
+
+  console.log({_id: data_id, data});
 });
