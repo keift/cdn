@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.title = "Please wait...";
   info.innerText = "Please wait...";
 
-  for (let i = 0;i < timeouts.length;i++) if (timeouts[timeouts.indexOf(timeouts[i])].util < Date.now()) timeouts.splice(timeouts.indexOf(timeouts[i]), 1);
+  let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until < Date.now());
+  
+  for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
   localStorage.setItem("timeouts", JSON.stringify(timeouts));
   
   document.querySelector("#cookieChoiceInfo")?.remove();
