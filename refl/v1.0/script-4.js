@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   var info = document.querySelector("#info");
   document.title = "Please wait...";
   info.innerText = "Please wait...";
-
+  
   let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until < Date.now());
   
   for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   document.querySelector("#cookieChoiceInfo")?.remove();
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
-
+  
   await sleep(1000);
   
   if (!token) {
@@ -80,11 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
+    let usable_link = referral_links.find(link => timeouts.find(timeout => timeouts.referral_link_url !== link.url));
     
-    
-    if (verify === true) {
-      
-    }
+    console.log(usable_link)
     
   } catch(err) {
     blinkTitle("Error Redirection Token");
