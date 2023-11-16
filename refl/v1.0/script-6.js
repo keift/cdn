@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
-    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeouts.referral_link_url === link.url));
+    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url));
     
     console.log(usable_link)
     
