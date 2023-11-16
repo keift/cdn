@@ -35,7 +35,7 @@ async function SHA256(data) {
   if (isJSON(data)) data = JSON.stringify(data);
   let encoder = new TextEncoder();
   let uint8_data = encoder.encode(data);
-  console.log(data, Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join(""););
+  console.log(data, Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join(""));
   return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join("");
 };
 
