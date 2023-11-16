@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.title = "Please wait...";
   info.innerText = "Please wait...";
   
-  let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until < Date.now());
+  let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until <= Date.now());
   
   for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
   localStorage.setItem("timeouts", JSON.stringify(timeouts));
@@ -80,9 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
-    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url));
+    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.expiration_until >= Date.now()));
     
-    console.log(usable_link)
+    info.innerText = usable_link;
     
   } catch(err) {
     blinkTitle("Error Redirection Token");
