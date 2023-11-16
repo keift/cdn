@@ -75,13 +75,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   try {
-    let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
+    let { insert_recently_links, referral_links, original_link_url } = JSON.parse(b64decode(token));
+    insert_recently_links, referral_links, original_link_url;
     
     await sleep(1000);
     let usable_link = referral_links.find(link => !recently_redirected_links.find(_link => _link.url === link.url && _link.ip_address === __ip_addr && _link.expiration_until >= Date.now()));
     
     startTimer(standby_time, async () => {
-      if (verify === true && usable_link) {
+      if (insert_recently_links === true && usable_link) {
         recently_redirected_links.push({"url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
       }
