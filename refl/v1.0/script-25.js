@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     startTimer(standby_time, async () => {
       if (verify === true && usable_link) {
-        recently_redirected_links.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
+        recently_redirected_links.push({"url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
       }
       
