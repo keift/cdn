@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     startTimer(standby_time, async () => {
       if (insert_recently_links === true && usable_link) {
-        let hash = usable_link.acc_id ? await SHA256(usable_link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(usable_link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
+        let hash = usable_link.acc_id ? await SHA256(usable_link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + usable_link.acc_id + "@" + __ip_addr) : await SHA256(usable_link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
         recently_redirected_links.push({hash, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
       }
