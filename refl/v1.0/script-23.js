@@ -75,11 +75,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   try {
-    await sleep(1000);
-    
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
-    
+
+    await sleep(1000);
     startTimer(standby_time, async () => {
       if (verify === true && usable_link) {
         timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
