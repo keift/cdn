@@ -99,11 +99,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (insert_recently_links === undefined || referral_links === undefined || original_link_url === undefined) throw new Error();
     
     await sleep(1000);
-    let usable_link = await referral_links.find(link => !recently_redirected_links.find(async _link => _link.hash === link.acc_id ? await SHA256(link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr) && _link.expiration_until >= Date.now()));
+    let usable_link = await referral_links.find(async link => {
+      let hash = link.acc_id ? await SHA256(link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
+      return !recently_redirected_links.find(_link => _link.hash === hash && _link.expiration_until >= Date.now());
+    })
     
     startTimer(standby_time, async () => {
       if (insert_recently_links === true && usable_link) {
-        recently_redirected_links.push({"hash": usable_link.acc_id ? await SHA256(usable_link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(usable_link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr), "expiration_until": Date.now() + ms(usable_link.expiration_until)});
+        let hash = usable_link.acc_id ? await SHA256(usable_link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(usable_link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
+        recently_redirected_links.push({hash, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
       }
 
