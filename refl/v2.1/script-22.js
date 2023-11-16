@@ -1,1 +1,126 @@
-var title_interval,title_timeout,search_params=new URLSearchParams(location.search),recently_redirected_links=JSON.parse(localStorage.getItem("recently_redirected_links"))||[],_token=search_params.get("token"),standby_time=0,b64encode=e=>btoa(e).split("=").join(""),b64decode=e=>atob(e);function isJSON(e){if("object"==typeof e&&null!==e)return!0;try{JSON.parse(e)}catch(t){return!1}return!0}function generateRandomBuffer(e){let t=new Uint8Array(e);return crypto.getRandomValues(t),String.fromCharCode(...t)}function generateRandomHex(e){let t=new Uint8Array(e);return crypto.getRandomValues(t),Array.from(t).map(e=>e.toString(16).padStart(2,"0")).join("")}async function SHA256(e){isJSON(e)&&(e=JSON.stringify(e));let t=new TextEncoder().encode(e);return console.log(e,Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",t))).map(e=>e.toString(16).padStart(2,"0")).join("")),Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",t))).map(e=>e.toString(16).padStart(2,"0")).join("")}function blinkTitle(e){clearInterval(title_interval),clearTimeout(title_timeout),document.title=e,title_interval=setInterval(()=>{document.title=e,title_timeout=setTimeout(()=>document.title="RefL",2e3)},4e3)}function startTimer(e,t){clearInterval(title_interval),clearTimeout(title_timeout),function i(){if(0===e)return t();document.title="Please wait for "+e+" seconds",info.innerText="Please wait for "+e+" seconds",e--,setTimeout(i,1e3)}()}function sleep(e){return new Promise(t=>setTimeout(t,e))}history.pushState("","","/redirection?token="+b64encode(generateRandomBuffer(256))),document.addEventListener("DOMContentLoaded",async()=>{let e=_token;_token=void 0;let t=document.querySelector("#info"),i=recently_redirected_links.filter(e=>e.expiration_until<=Date.now());function n(){document.querySelector("#cookieChoiceInfo")?document.querySelector("#cookieChoiceInfo").remove():setTimeout(()=>n())}document.title="Please wait...",t.innerText="Please wait...",n();for(let r=0;r<i.length;r++)recently_redirected_links.splice(recently_redirected_links.indexOf(i[r]),1);if(localStorage.setItem("recently_redirected_links",JSON.stringify(recently_redirected_links)),!e){blinkTitle("Error Redirection Token"),t.innerText="Error Redirection Token";return}try{let{insert_recently_links:l,aggressive_redirect:o,referral_links:a,original_link_url:s}=JSON.parse(b64decode(e));if(void 0===l||void 0===a||void 0===s)throw Error();await sleep(1e3);let c=await (async()=>{for(let e=0;e<a.length;e++){let t=a[e].acc_id?await SHA256(a[e].url.split("http://").join("").split("https://").join("").split("/")[0]+"#"+a[e].acc_id+"@"+__ip_addr):await SHA256(a[e].url.split("http://").join("//").split("https://").join("//")+"@"+__ip_addr);if(!recently_redirected_links.find(e=>e.hash===t&&e.expiration_until>=Date.now()))return a[e]}})();startTimer(standby_time,async()=>{if(!0===l&&c){let e=c.acc_id?await SHA256(c.url.split("http://").join("").split("https://").join("").split("/")[0]+"#"+link.acc_id+"@"+__ip_addr):await SHA256(c.url.split("http://").join("//").split("https://").join("//")+"@"+__ip_addr);recently_redirected_links.push({hash:e,expiration_until:Date.now()+ms(c.expiration_until)}),localStorage.setItem("recently_redirected_links",JSON.stringify(recently_redirected_links))}document.title="Redirecting...",t.innerText="Redirecting...",await sleep(1e3),location.href=(c?.url||s).split("http://").join("//").split("https://").join("//")})}catch(d){blinkTitle("Error Redirection Token"),t.innerText="Error Redirection Token";return}});
+var search_params = new URLSearchParams(location.search);
+var recently_redirected_links = JSON.parse(localStorage.getItem("recently_redirected_links")) || [];
+var _token = search_params.get("token");
+var standby_time = 0;
+
+var title_interval;
+var title_timeout;
+
+var b64encode = value => btoa(value).split("=").join("");
+var b64decode = value => atob(value);
+
+function isJSON(data) {
+  if (typeof data === "object" && data !== null) return true;
+  try {
+    JSON.parse(data);
+  } catch(err) {
+    return false;
+  }
+  return true;
+};
+
+function generateRandomBuffer(size) {
+  let buffer = new Uint8Array(size);
+  crypto.getRandomValues(buffer);
+  return String.fromCharCode(...buffer);
+};
+
+function generateRandomHex(size) {
+  let buffer = new Uint8Array(size);
+  crypto.getRandomValues(buffer);
+  return Array.from(buffer).map(byte => byte.toString(16).padStart(2, "0")).join("");
+};
+
+async function SHA256(data) {
+  if (isJSON(data)) data = JSON.stringify(data);
+  let encoder = new TextEncoder();
+  let uint8_data = encoder.encode(data);
+  console.log(data, Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join(""));
+  return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", uint8_data))).map(byte => byte.toString(16).padStart(2, "0")).join("");
+};
+
+function blinkTitle(title) {
+  clearInterval(title_interval);
+  clearTimeout(title_timeout);
+  
+  document.title = title;
+  title_interval = setInterval(() => {
+    document.title = title;
+    title_timeout = setTimeout(() => document.title = "RefL", 2000);
+  }, 4000)
+};
+
+function startTimer(seconds, callback) {
+  function count() {
+    if (seconds === 0) return callback();
+    document.title = "Please wait for " + seconds + " seconds";
+    info.innerText = "Please wait for " + seconds + " seconds";
+    seconds--;
+    setTimeout(count, 1000);
+  }
+  clearInterval(title_interval);
+  clearTimeout(title_timeout);
+  
+  count();
+};
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
+history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
+
+document.addEventListener("DOMContentLoaded", async () => {
+  let token = _token;
+  _token = undefined;
+  let info = document.querySelector("#info");
+  let expired_recently_redirected_links = recently_redirected_links.filter(link => link.expiration_until <= Date.now());
+  document.title = "Please wait...";
+  info.innerText = "Please wait...";
+
+  function removeElements() {
+    if (document.querySelector("#cookieChoiceInfo")) {
+      document.querySelector("#cookieChoiceInfo").remove();
+    } else setTimeout(() => removeElements());
+  }
+  removeElements();
+  
+  for (let i = 0;i < expired_recently_redirected_links.length;i++) recently_redirected_links.splice(recently_redirected_links.indexOf(expired_recently_redirected_links[i]), 1);
+  localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
+  
+  if (!token) {
+    blinkTitle("Error Redirection Token");
+    info.innerText = "Error Redirection Token";
+    return;
+  }
+  
+  try {
+    let { insert_recently_links, aggressive_redirect, referral_links, original_link_url } = JSON.parse(b64decode(token));
+    if (insert_recently_links === undefined || referral_links === undefined || original_link_url === undefined) throw new Error();
+    
+    await sleep(1000);
+    let usable_link = await (async () => {
+      for (let i = 0;i < referral_links.length;i++) {
+        let hash = referral_links[i].acc_id ? await SHA256(referral_links[i].url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + referral_links[i].acc_id + "@" + __ip_addr) : await SHA256(referral_links[i].url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
+        if (!recently_redirected_links.find(link => link.hash === hash && link.expiration_until >= Date.now())) return referral_links[i];
+      }
+    })();
+    
+    startTimer(standby_time, async () => {
+      if (insert_recently_links === true && usable_link) {
+        let hash = usable_link.acc_id ? await SHA256(usable_link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(usable_link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr);
+        recently_redirected_links.push({hash, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
+        localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
+      }
+      
+      document.title = "Redirecting...";
+      info.innerText = "Redirecting...";
+      await sleep(1000);
+      location.href = (usable_link?.url || original_link_url).split("http://").join("//").split("https://").join("//");
+    })
+  } catch(err) {
+    blinkTitle("Error Redirection Token");
+    info.innerText = "Error Redirection Token";
+    return;
+  }
+});
