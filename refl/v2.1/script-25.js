@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   try {
-    let { insert_recently_links, go_directly, referral_links, original_link_url } = JSON.parse(b64decode(token));
-    if (insert_recently_links === undefined || go_directly === undefined || referral_links === undefined || original_link_url === undefined) throw new Error();
+    let { insert_recently_links, referral_links, original_link_url } = JSON.parse(b64decode(token));
+    if (insert_recently_links === undefined || referral_links === undefined || original_link_url === undefined) throw new Error();
     
     await sleep(1000);
     let usable_link = await (async () => {
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.title = "Redirecting...";
       info.innerText = "Redirecting...";
       await sleep(1000);
-      location.href = (go_directly === true ? original_link_url : usable_link?.url || original_link_url).split("http://").join("//").split("https://").join("//");
+      location.href = (usable_link?.url || original_link_url).split("http://").join("//").split("https://").join("//");
     })
   } catch(err) {
     blinkTitle("Error Redirection Token");
