@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { insert_recently_links, referral_links, original_link_url } = JSON.parse(b64decode(token));
-    insert_recently_links, referral_links, original_link_url;
+    if (!insert_recently_links || !referral_links || !original_link_url) throw new Error();
     
     await sleep(1000);
     let usable_link = referral_links.find(link => !recently_redirected_links.find(_link => _link.url === link.url && _link.ip_address === __ip_addr && _link.expiration_until >= Date.now()));
