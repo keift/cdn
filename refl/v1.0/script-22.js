@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.innerText = "Error Redirection Token";
     return;
   }
-
-  await sleep(1000);
   
   try {
+    await sleep(1000);
+    
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
