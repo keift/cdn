@@ -80,9 +80,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
-    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.expiration_until >= Date.now()));
+    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
-    info.innerText = JSON.stringify(usable_link);
+    setTimer(5, async () => {
+      if (verify === true) {
+        timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
+        localStorage.setItem("timeouts", JSON.stringify(timeouts));
+      }
+      
+      document.title = "Redirecting...";
+      info.innerText = "Redirecting...";
+      await sleep(1000);
+      info.innerText = usable_link?.url || original_link;
+    })
     
   } catch(err) {
     blinkTitle("Error Redirection Token");
