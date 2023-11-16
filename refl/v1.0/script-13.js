@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
     startTimer(5, async () => {
-      if (verify === true) {
+      if (verify === true && usable_link) {
         timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("timeouts", JSON.stringify(timeouts));
       }
