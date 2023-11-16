@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.expiration_until >= Date.now()));
     
-    info.innerText = usable_link;
+    info.innerText = JSON.stringify(usable_link);
     
   } catch(err) {
     blinkTitle("Error Redirection Token");
