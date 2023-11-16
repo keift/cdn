@@ -1,5 +1,5 @@
 var search_params = new URLSearchParams(location.search);
-var timeouts = JSON.parse(localStorage.getItem("timeouts")) || [];
+var recently_redirected_links = JSON.parse(localStorage.getItem("recently_redirected_links")) || [];
 var token = search_params.get("token");
 var standby_time = 0;
 
@@ -58,12 +58,12 @@ function sleep(ms) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   let info = document.querySelector("#info");
-  let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until <= Date.now());
+  let expired_recently_redirected_links = recently_redirected_links.filter(link => link.expiration_until <= Date.now());
   document.title = "Please wait...";
   info.innerText = "Please wait...";
   
-  for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
-  localStorage.setItem("timeouts", JSON.stringify(timeouts));
+  for (let i = 0;i < expired_recently_redirected_links.length;i++) recently_redirected_links.splice(recently_redirected_links.indexOf(expired_recently_redirected_links[i]), 1);
+  localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
   
   document.querySelector("#cookieChoiceInfo")?.remove();
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
@@ -76,13 +76,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   try {
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
-    let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
-
+    
     await sleep(1000);
+    let usable_link = referral_links.find(link => !recently_redirected_links.find(_link => _link.url === link.url && _link.ip_address === __ip_addr && _link.expiration_until >= Date.now()));
+    
     startTimer(standby_time, async () => {
       if (verify === true && usable_link) {
-        timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
-        localStorage.setItem("timeouts", JSON.stringify(timeouts));
+        recently_redirected_links.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
+        localStorage.setItem("recently_redirected_links", JSON.stringify(recently_redirected_links));
       }
       
       document.title = "Redirecting...";
