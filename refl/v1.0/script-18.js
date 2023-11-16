@@ -56,10 +56,7 @@ function sleep(ms) {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  var info = document.querySelector("#info");
-  document.title = "Please wait...";
-  info.innerText = "Please wait...";
-  
+  let info = document.querySelector("#info");
   let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until <= Date.now());
   
   for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
@@ -67,8 +64,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   document.querySelector("#cookieChoiceInfo")?.remove();
   history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
-  
-  await sleep(1000);
   
   if (!token) {
     blinkTitle("Error Redirection Token");
@@ -80,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
-    startTimer(0, async () => {
+    startTimer(5, async () => {
       if (verify === true && usable_link) {
         timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("timeouts", JSON.stringify(timeouts));
