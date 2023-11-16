@@ -39,13 +39,13 @@ function blinkTitle(title) {
 
 function startTimer(seconds, callback) {
   function count() {
-    document.title = "Please wait for " + seconds + " seconds";
-    info.innerText = "Please wait for " + seconds + " seconds";
-    seconds--;
     setTimeout(() => {
       if (seconds === 0) return callback();
       count();
     }, 1000)
+    document.title = "Please wait for " + seconds + " seconds";
+    info.innerText = "Please wait for " + seconds + " seconds";
+    seconds--;
   }
   clearInterval(title_interval);
   clearTimeout(title_timeout);
