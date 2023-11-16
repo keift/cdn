@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   
   try {
-    let { verify, referral_links, original_link } = JSON.parse(b64decode(token));
+    let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
     startTimer(5, async () => {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.title = "Redirecting...";
       info.innerText = "Redirecting...";
       await sleep(1000);
-      info.innerText = usable_link?.url || original_link;
+      info.innerText = usable_link?.url || original_link_url;
     })
     
   } catch(err) {
