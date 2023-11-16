@@ -1,6 +1,7 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || [];
 var token = search_params.get("token");
+var standby_time = 0;
 
 var title_interval;
 var title_timeout;
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
     let usable_link = referral_links.find(link => !timeouts.find(timeout => timeout.referral_link_url === link.url && timeout.ip_address === __ip_addr && timeout.expiration_until >= Date.now()));
     
-    startTimer(5, async () => {
+    startTimer(standby_time, async () => {
       if (verify === true && usable_link) {
         timeouts.push({"referral_link_url": usable_link.url, "ip_address": __ip_addr, "expiration_until": Date.now() + ms(usable_link.expiration_until)});
         localStorage.setItem("timeouts", JSON.stringify(timeouts));
