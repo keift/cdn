@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (insert_recently_links === undefined || referral_links === undefined || original_link_url === undefined) throw new Error();
     
     await sleep(1000);
-    let usable_link = referral_links.find(link => !recently_redirected_links.find(async _link => _link.hash === link.acc_id ? await SHA256(link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr) && _link.expiration_until >= Date.now()));
+    let usable_link = await referral_links.find(link => !recently_redirected_links.find(async _link => _link.hash === link.acc_id ? await SHA256(link.url.split("http://").join("").split("https://").join("").split("/")[0] + "#" + link.acc_id + "@" + __ip_addr) : await SHA256(link.url.split("http://").join("//").split("https://").join("//") + "@" + __ip_addr) && _link.expiration_until >= Date.now()));
     
     startTimer(standby_time, async () => {
       if (insert_recently_links === true && usable_link) {
