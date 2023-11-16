@@ -1,7 +1,7 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || [];
 var token = search_params.get("token");
-var standby_time = 0;
+var standby_time = 5;
 
 var title_interval;
 var title_timeout;
