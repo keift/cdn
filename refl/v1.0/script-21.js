@@ -1,7 +1,7 @@
 var search_params = new URLSearchParams(location.search);
 var timeouts = JSON.parse(localStorage.getItem("timeouts")) || [];
 var token = search_params.get("token");
-var standby_time = 5;
+var standby_time = 0;
 
 var title_interval;
 var title_timeout;
@@ -59,6 +59,8 @@ function sleep(ms) {
 document.addEventListener("DOMContentLoaded", async () => {
   let info = document.querySelector("#info");
   let expired_timeouts = timeouts.filter(timeout => timeout.expiration_until <= Date.now());
+  document.title = "Please wait...";
+  info.innerText = "Please wait...";
   
   for (let i = 0;i < expired_timeouts.length;i++) timeouts.splice(timeouts.indexOf(expired_timeouts[i]), 1);
   localStorage.setItem("timeouts", JSON.stringify(timeouts));
@@ -71,6 +73,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     info.innerText = "Error Redirection Token";
     return;
   }
+
+  await sleep(1000);
   
   try {
     let { verify, referral_links, original_link_url } = JSON.parse(b64decode(token));
