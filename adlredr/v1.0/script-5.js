@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + url;
       if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
       if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
+      console.log({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
       referral_links.push({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
     }
 
