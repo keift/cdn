@@ -64,9 +64,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
       referral_links.push({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
     }
-
+    
     console.log(referral_links)
   } catch(err) {
-    return;
+    return console.error(err);
   }
 });
