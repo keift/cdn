@@ -55,14 +55,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     let profile = profiles.find(profile => profile.id === prf_id);
     let referral_links = [];
     
-    for (let i = 0;i < profile.accounts;i++) {
+    for (let i = 0;i < profile.accounts.length;i++) {
       let shrink_url;
       if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
       if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + url;
       if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
       if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
-      console.log({"acc_id": profile.accounts[i].token, "expiration_until": "1m"});
-      referral_links.push({"acc_id": profile.accounts[i].token, "expiration_until": "1m"});
+      referral_links.push({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
     }
     
     console.log(referral_links)
