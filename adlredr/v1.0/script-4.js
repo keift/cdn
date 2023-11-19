@@ -35,6 +35,11 @@ function generateRandomBuffer(size) {
   return String.fromCharCode(...buffer);
 };
 
+async function shortISGD(url) {
+  let { data } = await axios.get("https://is.gd/create.php", {"params": {url, "format": "json"}});
+  return data.shorturl;
+};
+
 history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -47,7 +52,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     let { prf_id, url } = JSON.parse(b64decode(token));
     if (prf_id === undefined || url === undefined) throw new Error();
     
-    console.log(prf_id, url)
+    let profile = profiles.find(profile => profile.id === prf_id);
+    let referral_links = [];
+    
+    for (let i = 0;i < profile.accounts;i++) {
+      let shrink_url;
+      if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
+      if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + url;
+      if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
+      if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
+      referral_links.push({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
+    }
+
+    console.log(referral_links)
   } catch(err) {
     return;
   }
