@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     for (let i = 0;i < profile.accounts.length;i++) {
       let shrink_url;
-      if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
-      if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + encodeURIComponent(verified_refl);
-      if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
-      if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
+      if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(await shortISGD(verified_refl));
+      if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + encodeURIComponent(await shortISGD(verified_refl));
+      if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(await shortISGD(verified_refl));
+      if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(await shortISGD(verified_refl));
       referral_links.push({"acc_id": profile.accounts[i].token, "url": (await shortISGD(shrink_url)).split("http://").join("//").split("https://").join("//"), expiration_until});
     }
 
