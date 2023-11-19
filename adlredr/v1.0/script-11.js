@@ -54,17 +54,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     let profile = profiles.find(profile => profile.id === prf_id);
     let referral_links = [];
+    let expiration_until = "1m";
+
+    let verified_refl = "https://refl75df6c94.blogspot.com/redirection?token=" + b64encode(JSON.stringify(
+      {
+        "verified": true,
+        "referral_links": profile.accounts.map(account => ({"acc_id": account.token, "url": "_blank", expiration_until})),
+        "target_link_url": url.split("http://").join("//").split("https://").join("//")
+      }
+    ))
     
     for (let i = 0;i < profile.accounts.length;i++) {
       let shrink_url;
-      if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
-      if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + url;
-      if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
-      if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(url);
-      referral_links.push({"acc_id": profile.accounts[i].token, "url": await shortISGD(shrink_url), "expiration_until": "1m"});
+      if (profile.accounts[i].name === "trlink") shrink_url = "https://tr.link/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
+      if (profile.accounts[i].name === "ouoio") shrink_url = "https://ouo.io/qs/" + profile.accounts[i].token + "?s=" + verified_refl;
+      if (profile.accounts[i].name === "uiiio") shrink_url = "https://uii.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
+      if (profile.accounts[i].name === "exeio") shrink_url = "https://exe.io/full?api=" + profile.accounts[i].token + "&url=" + b64encode(verified_refl);
+      referral_links.push({"acc_id": profile.accounts[i].token, "url": (await shortISGD(shrink_url)).split("http://").join("//").split("https://").join("//"), expiration_until});
     }
+
+    let unverified_refl = "https://refl75df6c94.blogspot.com/redirection?token=" + b64encode(JSON.stringify(
+      {
+        "verified": false, referral_links,
+        "target_link_url": url.split("http://").join("//").split("https://").join("//")
+      }
+    ))
     
-    console.log(referral_links)
+    console.log(await shortISGD(unverified_refl))
   } catch(err) {
     return;
   }
