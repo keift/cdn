@@ -29,6 +29,12 @@ var _token = search_params.get("token");
 var b64encode = value => btoa(value).split("=").join("");
 var b64decode = value => atob(value);
 
+function generateRandomBuffer(size) {
+  let buffer = new Uint8Array(size);
+  crypto.getRandomValues(buffer);
+  return String.fromCharCode(...buffer);
+};
+
 history.pushState("", "", "/redirection?token=" + b64encode(generateRandomBuffer(256)));
 
 document.addEventListener("DOMContentLoaded", async () => {
