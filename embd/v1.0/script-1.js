@@ -21,7 +21,7 @@ function blinkTitle(title) {
   document.title = title;
   title_interval = setInterval(() => {
     document.title = title;
-    title_timeout = setTimeout(() => document.title = "Redr", 2000);
+    title_timeout = setTimeout(() => document.title = "embd", 2000);
   }, 4000)
 };
 
