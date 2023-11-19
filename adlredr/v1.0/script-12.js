@@ -79,6 +79,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         "target_link_url": url.split("http://").join("//").split("https://").join("//")
       }
     ))
+
+    console.log(verified_refl, unverified_refl)
     
     console.log(await shortISGD(unverified_refl))
   } catch(err) {
