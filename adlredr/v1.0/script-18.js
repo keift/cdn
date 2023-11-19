@@ -80,9 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     ))
 
-    console.log(verified_refl, unverified_refl)
-    
-    console.log(await shortISGD(unverified_refl))
+    return unverified_refl;
   } catch(err) {
     return;
   }
