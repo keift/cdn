@@ -58,12 +58,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     await sleep(1000);
 
-    let embed = document.createElement("iframe");
-    embed.id = "view";
-    embed.src = source;
-    
     info.remove();
-    document.querySelector("#app").appendChild(embed);
+    document.querySelector("#view").src = source;
   } catch(err) {
     blinkTitle("Error View Token");
     info.innerText = "Error View Token";
