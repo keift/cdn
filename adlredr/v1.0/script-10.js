@@ -36,7 +36,7 @@ function generateRandomBuffer(size) {
 };
 
 async function shortISGD(url) {
-  let { data } = await axios.get("https://is.gd/create.php", {"params": {"https://redr89e90cb6.tr.gg?token=" + b64encode(JSON.stringify({url})), "format": "json"}});
+  let { data } = await axios.get("https://is.gd/create.php", {"params": {"url": "https://redr89e90cb6.tr.gg?token=" + b64encode(JSON.stringify({url})), "format": "json"}});
   return data.shorturl;
 };
 
