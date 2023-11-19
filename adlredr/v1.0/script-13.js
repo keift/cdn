@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let verified_refl = "https://refl75df6c94.blogspot.com/redirection?token=" + b64encode(JSON.stringify(
       {
         "verified": true,
-        "referral_links": profile.accounts.map(account => ({"acc_id": account.token, "url": "_blank", expiration_until})),
+        "referral_links": profile.accounts.map(account => ({"acc_id": account.token, "url": "//is.gd/_", expiration_until})),
         "target_link_url": url.split("http://").join("//").split("https://").join("//")
       }
     ))
