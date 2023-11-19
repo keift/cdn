@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     let { prf_id, url } = JSON.parse(b64decode(token));
-    if (url) throw new Error();
+    if (prf_id === undefined || url === undefined) throw new Error();
     
     console.log(prf_id, url)
   } catch(err) {
