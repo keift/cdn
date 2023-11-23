@@ -13,4 +13,4 @@ var title_interval,title_timeout,search_params=new URLSearchParams(location.sear
     <div id="app" style="margin-top: 250px;text-align: center">
       <h2 id="info"></h2>
     </div>
-  `;let n=document.querySelector("#info");if(document.title="Redirecting...",n.innerText="Redirecting...",!e){blinkTitle("Error Redirection Token"),n.innerText="Error Redirection Token";return}try{let{url:r}=JSON.parse(b64decode(e));if(void 0===r)throw Error();document.title="Redirecting...",n.innerText="Redirecting...",await sleep(1e3),location.href=r.split("http://").join("//").split("https://").join("//")}catch(i){blinkTitle("Error Redirection Token"),n.innerText="Error Redirection Token";return}});
+  `;let r=document.querySelector("#info");if(!e){blinkTitle("Error Redirection Token"),r.innerText="Error Redirection Token";return}try{let{url:n}=JSON.parse(b64decode(e));if(void 0===n)throw Error();location.href=n.split("http://").join("//").split("https://").join("//")}catch(i){blinkTitle("Error Redirection Token"),r.innerText="Error Redirection Token";return}});
