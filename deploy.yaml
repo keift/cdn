@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NAME: "casinoscores-b"
+  PORT: "3000:3000"
+  MAIN: "/"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      UNIQUE: "${{ github.run_id }}-${{ github.run_attempt }}"
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Compress repository
+      run: |
+        tar -czf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz ./
+
+    - name: Install SSH tool
+      run: sudo apt-get install -y sshpass
+
+    - name: Upload repository to the server
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} /tmp/${{ env.NAME }}-$UNIQUE.tar.gz ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/tmp/${{ env.NAME }}-$UNIQUE.tar.gz
+        rm -rf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz
+
+    - name: Build and run Docker image
+      run: |
+        sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
+          mkdir /tmp/${{ env.NAME }}-$UNIQUE
+          tar -xzf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz -C /tmp/${{ env.NAME }}-$UNIQUE
+          sudo docker build -t ${{ env.NAME }}-$UNIQUE:latest /tmp/${{ env.NAME }}-$UNIQUE${{ env.MAIN }}
+          sudo docker stop ${{ env.NAME }} || true
+          sudo docker rm ${{ env.NAME }} || true
+          sudo docker run -d -p ${{ env.PORT }} --restart unless-stopped --name ${{ env.NAME }} ${{ env.NAME }}-$UNIQUE:latest
+
+          rm -rf /tmp/${{ env.NAME }}-$UNIQUE
+          rm -rf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz
+          sudo docker image prune -af
+        EOF
