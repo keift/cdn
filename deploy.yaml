@@ -39,11 +39,11 @@ jobs:
     - name: Build and run Docker image
       run: |
         sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << EOF
+          OLD_CONTAINER_IMAGE="\$(sudo docker inspect --format '{{.Config.Image}}' ${{ env.NAME }})"
+
           mkdir /tmp/${{ env.NAME }}-$UNIQUE
           tar -xzf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz -C /tmp/${{ env.NAME }}-$UNIQUE
           sudo docker build -t ${{ env.NAME }}-$UNIQUE:latest /tmp/${{ env.NAME }}-$UNIQUE${{ env.MAIN }}
-
-          OLD_CONTAINER_IMAGE="\$(sudo docker inspect --format '{{.Config.Image}}' ${{ env.NAME }})"
 
           sudo docker container stop ${{ env.NAME }} || true
           sudo docker container remove ${{ env.NAME }} || true
