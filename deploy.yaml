@@ -1,14 +1,18 @@
 name: Deploy
 
+env:
+  NAME: "casinoscores-b"
+  PORT: "3000:3000"
+  MAIN: "/"
+
 on:
   push:
     branches:
       - main
 
-env:
-  NAME: "casinoscores-b"
-  PORT: "3000:3000"
-  MAIN: "/"
+concurrency:
+  group: "deploy-${{ github.ref }}"
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -38,11 +42,15 @@ jobs:
           mkdir /tmp/${{ env.NAME }}-$UNIQUE
           tar -xzf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz -C /tmp/${{ env.NAME }}-$UNIQUE
           sudo docker build -t ${{ env.NAME }}-$UNIQUE:latest /tmp/${{ env.NAME }}-$UNIQUE${{ env.MAIN }}
-          sudo docker stop ${{ env.NAME }} || true
-          sudo docker rm ${{ env.NAME }} || true
+
+          OLD_CONTAINER_IMAGE="\$(sudo docker inspect --format '{{.Config.Image}}' ${{ env.NAME }})"
+
+          sudo docker container stop ${{ env.NAME }} || true
+          sudo docker container remove ${{ env.NAME }} || true
+          sudo docker image remove \$OLD_CONTAINER_IMAGE || true
           sudo docker run -d -p ${{ env.PORT }} --restart unless-stopped --name ${{ env.NAME }} ${{ env.NAME }}-$UNIQUE:latest
 
           rm -rf /tmp/${{ env.NAME }}-$UNIQUE
           rm -rf /tmp/${{ env.NAME }}-$UNIQUE.tar.gz
-          sudo docker image prune -af
+          sudo docker system prune -f
         EOF
