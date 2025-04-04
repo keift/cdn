@@ -1,6 +1,6 @@
 # Setup Zapret to bypass DPI
 
-## Keep Hosts content up to date
+## 1- Keep Hosts content up to date
 
 If you have changed the hostname before, it may not have been updated in `/etc/hosts`. Correct this to avoid problems during installation.
 
@@ -9,7 +9,7 @@ If you have changed the hostname before, it may not have been updated in `/etc/h
 > sudo sed -i "s/^\(127\.0\.1\.1\s\+\)\S\+/\1$(hostname)/" /etc/hosts
 > ```
 
-## Install Nslookup tool
+## 2- Install Nslookup tool
 
 Tool required by Zapret to check DNS during installation.
 
@@ -25,7 +25,7 @@ Tool required by Zapret to check DNS during installation.
 > sudo pacman -S --noconfirm bind
 > ```
 
-## Install Unzip tool
+## 3- Install Unzip tool
 
 Essential tool for extracting zip files.
 
@@ -41,7 +41,7 @@ Essential tool for extracting zip files.
 > sudo pacman -S --noconfirm unzip
 > ```
 
-## Change DNS rules
+## 4- Change DNS rules
 
 Zapret only bypasses DPI restrictions. But it does not set up a DNS for us. We need to do that ourselves. We are using Yandex DNS here.
 
@@ -75,7 +75,7 @@ _If you want to undo this action you can do the following_
 > sudo reboot
 > ```
 
-## Install Zapret
+## 5- Install Zapret
 
 Download the compiled zip file as release on GitHub.
 
@@ -84,7 +84,7 @@ Download the compiled zip file as release on GitHub.
 > wget https://github.com/bol-van/zapret/releases/download/v70.5/zapret-v70.5.zip
 > ```
 
-## Unzip the file
+## 6- Unzip the file
 
 Extract the zip file and then delete it.
 
@@ -96,7 +96,7 @@ Extract the zip file and then delete it.
 > rm -rf ./zapret-v70.5.zip
 > ```
 
-## Prepare for setup
+## 7- Prepare for setup
 
 Install the pre-installation requirements and prepare to perform a clean install.
 
@@ -116,13 +116,14 @@ Install the pre-installation requirements and prepare to perform a clean install
 Questions that may arise at this time:
 
 > ```
+> # 1
 > select firewall type :
 > 1 : iptables
 > 2 : nftables
 > your choice (default : nftables) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
-## Do Blockcheck
+## 8- Do Blockcheck
 
 Find the DPI methods implemented by the ISP.
 
@@ -134,19 +135,26 @@ Find the DPI methods implemented by the ISP.
 Questions that may arise at this time:
 
 > ```
+> # 1
 > specify domain(s) to test. multiple domains are space separated.
 > domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BANNED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
 >
+> # 2
 > ip protocol version(s) - 4, 6 or 46 for both (default: 4) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
+> # 3
 > check http (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
+> # 4
 > check https tls 1.2 (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
+> # 5
 > check https tls 1.3 (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
+> #6
 > how many times to repeat each test (default: 1) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
+> #7
 > quick - scan as fast as possible to reveal any working strategy
 > standard - do investigation what works on your DPI
 > force - scan maximum despite of result
@@ -168,8 +176,104 @@ Copy the latest setting from these results. Example:
 >                                                                                      MAKE A NOTE FOR IT
 > ```
 
-This is an example settings for `nfqws`. It may be different for each person. Make a note of it.
+This is an example settings for **nfqws**. It may be different for each person. Make a note of it.
 
 ```
 --dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1
 ```
+
+
+## 9- Install Zapret
+
+Once everything is complete, we can start installing Zapret.
+
+```shell
+# Start the installation
+./install_easy.sh
+```
+
+Questions that may arise at this time:
+
+> ```
+> # 1
+> do you want the installer to copy it for you (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
+>
+> # 2
+> select firewall type :
+> 1 : iptables
+> 2 : nftables
+> your choice (default : nftables) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 3
+> enable ipv6 support (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 4
+> select flow offloading :
+> 1 : none
+> 2 : software
+> 3 : hardware
+> your choice (default : none) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 5
+> enable tpws socks mode on port 987 ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 6
+> enable tpws transparent mode ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 7
+> enable nfqws ? (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
+>
+> # 8
+> do you want to edit the options (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
+> ```
+
+Then we write the **nfqws** settings that we just copied to `NFQWS_OPT`. Example:
+
+> ```
+> NFQWS_PORTS_TCP=80,443
+> NFQWS_PORTS_UDP=443
+> NFQWS_TCP_PKT_OUT=9
+> NFQWS_TCP_PKT_IN=3
+> NFQWS_UDP_PKT_OUT=9
+> NFQWS_UDP_PKT_IN=0
+> NFQWS_PORTS_TCP_KEEPALIVE=
+> NFQWS_PORTS_UDP_KEEPALIVE=
+> NFQWS_OPT="--dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1"
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>                                                 YOUR SETTINGS HERE
+> ```
+
+Then save with **CTRL + S** and close with **CTRL + X**.
+
+Let's continue with the questions:
+
+> ```
+> # 8
+> do you want to edit the options (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 9
+> LAN interface :
+> 1 : NONE
+> 2 : docker0
+> 3 : lo
+> 4 : wlp0s20f3
+> your choice (default : NONE) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 10
+> WAN interface :
+> 1 : ANY
+> 2 : docker0
+> 3 : lo
+> 4 : wlp0s20f3
+> your choice (default : ANY) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> # 11
+> select filtering :
+> 1 : none
+> 2 : ipset
+> 3 : hostlist
+> 4 : autohostlist
+> your choice (default : none) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+> ```
+
+🎉 That's it! You have now overcome all access barriers. Long live freedom!
