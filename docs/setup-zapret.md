@@ -141,22 +141,34 @@ Questions that may arise at this time:
 > # FIRST QUESTION
 > specify domain(s) to test. multiple domains are space separated.
 > domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BLOCKED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
->
+> ```
+
+> ```shell
 > # SECOND QUESTION
 > ip protocol version(s) - 4, 6 or 46 for both (default: 4) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # THIRD QUESTION
 > check http (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # FOURTH QUESTION
 > check https tls 1.2 (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # FIFTH QUESTION
 > check https tls 1.3 (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # SIXTH QUESTION
 > how many times to repeat each test (default: 1) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # SEVENTH QUESTION
 > quick - scan as fast as possible to reveal any working strategy
 > standard - do investigation what works on your DPI
@@ -200,32 +212,46 @@ Questions that may arise at this time:
 > ```shell
 > # FIRST QUESTION
 > do you want the installer to copy it for you (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
->
+> ```
+
+> ```shell
 > # SECOND QUESTION
 > select firewall type :
 > 1 : iptables
 > 2 : nftables
 > your choice (default : nftables) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # THIRD QUESTION
 > enable ipv6 support (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # FOURTH QUESTION
 > select flow offloading :
 > 1 : none
 > 2 : software
 > 3 : hardware
 > your choice (default : none) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # FIFTH QUESTION
 > enable tpws socks mode on port 987 ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # SIXTH QUESTION
 > enable tpws transparent mode ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # SEVENTH QUESTION
 > enable nfqws ? (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
->
+> ```
+
+> ```shell
 > # EIGHTH QUESTION
 > do you want to edit the options (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
 > ```
@@ -253,7 +279,9 @@ Let's continue with the questions:
 > ```shell
 > # EIGHTH QUESTION
 > do you want to edit the options (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # NINTH QUESTION
 > LAN interface :
 > 1 : NONE
@@ -261,7 +289,9 @@ Let's continue with the questions:
 > 3 : lo
 > 4 : wlp0s20f3
 > your choice (default : NONE) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # TENTH QUESTION
 > WAN interface :
 > 1 : ANY
@@ -269,7 +299,9 @@ Let's continue with the questions:
 > 3 : lo
 > 4 : wlp0s20f3
 > your choice (default : ANY) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
->
+> ```
+
+> ```shell
 > # ELEVENTH QUESTION
 > select filtering :
 > 1 : none
