@@ -49,7 +49,7 @@ Zapret only bypasses DPI restrictions. But it does not set up a DNS for us. We n
 > # Unlock /etc/resolv.conf file if it is already locked
 > sudo chattr -i /etc/resolv.conf
 >
-> # Delete /etc/resolv.conf file in case it is set as symlink
+> # Delete the /etc/resolv.conf file as it may be set as a symlink
 > sudo rm -rf /etc/resolv.conf
 >
 > # Rewrite the /etc/resolv.conf file and specify that we will use Yandex DNS in it
@@ -62,7 +62,7 @@ Zapret only bypasses DPI restrictions. But it does not set up a DNS for us. We n
 > sudo systemctl restart NetworkManager
 > ```
 
-_If you want to undo this action you can do the following_
+_If you want to undo this action you can do the following:_
 
 > ```shell
 > # Unlock /etc/resolv.conf file if it is already locked
@@ -80,6 +80,9 @@ _If you want to undo this action you can do the following_
 Download the compiled zip file as release on GitHub.
 
 > ```shell
+> # Go to the home directory
+> cd
+>
 > # Download the compiled zip file from GitHub
 > wget https://github.com/bol-van/zapret/releases/download/v70.5/zapret-v70.5.zip
 > ```
