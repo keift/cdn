@@ -115,7 +115,7 @@ Install the pre-installation requirements and prepare to perform a clean install
 
 Questions that may arise at this time:
 
-> ```
+> ```shell
 > # 1
 > select firewall type :
 > 1 : iptables
@@ -134,7 +134,7 @@ Find the DPI methods implemented by the ISP.
 
 Questions that may arise at this time:
 
-> ```
+> ```shell
 > # 1
 > specify domain(s) to test. multiple domains are space separated.
 > domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BANNED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
@@ -170,7 +170,7 @@ After the process is finished, the test results will appear.
 
 Copy the latest setting from these results. Example:
 
-> ```
+> ```shell
 > ipv4 discord.com curl_test_https_tls12 : nfqws --dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1
 >                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 >                                                                                      MAKE A NOTE FOR IT
@@ -178,7 +178,7 @@ Copy the latest setting from these results. Example:
 
 This is an example settings for **nfqws**. It may be different for each person. Make a note of it.
 
-```
+```shell
 --dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1
 ```
 
@@ -194,7 +194,7 @@ Once everything is complete, we can start installing Zapret.
 
 Questions that may arise at this time:
 
-> ```
+> ```shell
 > # 1
 > do you want the installer to copy it for you (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
 >
@@ -229,7 +229,7 @@ Questions that may arise at this time:
 
 Then we write the **nfqws** settings that we just copied to `NFQWS_OPT`. Example:
 
-> ```
+> ```shell
 > NFQWS_PORTS_TCP=80,443
 > NFQWS_PORTS_UDP=443
 > NFQWS_TCP_PKT_OUT=9
@@ -247,7 +247,7 @@ Then save with **CTRL + S** and close with **CTRL + X**.
 
 Let's continue with the questions:
 
-> ```
+> ```shell
 > # 8
 > do you want to edit the options (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 >
