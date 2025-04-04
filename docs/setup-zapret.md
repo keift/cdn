@@ -1,3 +1,11 @@
+# Setup Zapret
+
+## Keep Hosts content up to date
+
+```shell
+
+```
+
 ## Change DNS
 
 ```shell
