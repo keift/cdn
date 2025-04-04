@@ -1,6 +1,6 @@
-# Setup Zapret
+# Install Zapret to bypass DPI barriers
 
-## 1- Keep Hosts content up to date
+## Keep Hosts content up to date
 
 If you have changed the hostname before, it may not have been updated in `/etc/hosts`. Correct this to avoid problems during installation.
 
@@ -9,7 +9,7 @@ If you have changed the hostname before, it may not have been updated in `/etc/h
 > sudo sed -i "s/^\(127\.0\.1\.1\s\+\)\S\+/\1$(hostname)/" /etc/hosts
 > ```
 
-## 2- Install Nslookup tool
+## Install Nslookup tool
 
 Tool required by Zapret to check DNS during installation.
 
@@ -25,7 +25,7 @@ Tool required by Zapret to check DNS during installation.
 > sudo pacman -S --noconfirm bind
 > ```
 
-## 2- Install Unzip tool
+## Install Unzip tool
 
 Essential tool for extracting zip files.
 
@@ -41,7 +41,7 @@ Essential tool for extracting zip files.
 > sudo pacman -S --noconfirm unzip
 > ```
 
-## 2- Change DNS
+## Change DNS rules
 
 Zapret only bypasses DPI restrictions. But it does not set up a DNS for us. We need to do that ourselves. We are using Yandex DNS here.
 
@@ -75,7 +75,7 @@ _If you want to undo this action you can do the following_
 > sudo reboot
 > ```
 
-## 3- Install Zapret
+## Install Zapret
 
 Download the compiled zip file as release on GitHub.
 
@@ -84,7 +84,7 @@ Download the compiled zip file as release on GitHub.
 > wget https://github.com/bol-van/zapret/releases/download/v70.5/zapret-v70.5.zip
 > ```
 
-## 4- Unzip the file
+## Unzip the file
 
 Extract the zip file and then delete it.
 
