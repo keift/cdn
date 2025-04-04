@@ -81,7 +81,7 @@ Download the compiled zip file as release on GitHub.
 
 > ```shell
 > # Go to the home directory
-> cd
+> cd ~
 >
 > # Download the compiled zip file from GitHub
 > wget https://github.com/bol-van/zapret/releases/download/v70.5/zapret-v70.5.zip
