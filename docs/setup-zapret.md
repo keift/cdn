@@ -276,4 +276,15 @@ Let's continue with the questions:
 > your choice (default : none) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
+## 10- Finish the installation
+
+All done! We are done with this folder of Zapret anymore. We can delete it.
+
+> ```shell
+> # Come back
+>
+> # Delete the folder
+> rm -rf ./zapret-v70.5
+> ```
+
 🎉 That's it! You have now overcome all access barriers. Long live freedom!
