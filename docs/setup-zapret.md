@@ -102,7 +102,7 @@ Install the pre-installation requirements and prepare to perform a clean install
 
 > ```shell
 > # Enter the folder
-> cd ./zapret-v70.5.zip
+> cd ./zapret-v70.5
 >
 > # For a clean installation, remove any installation files that may be present in case an installation has been made before
 > ./uninstall_easy.sh
