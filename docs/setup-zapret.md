@@ -113,10 +113,63 @@ Install the pre-installation requirements and prepare to perform a clean install
 > ./install_bin.sh
 > ```
 
+Questions that may arise at this time:
+
+> ```
+> select firewall type :
+> 1 : iptables
+> 2 : nftables
+> your choice (default : nftables) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+> ```
+
 ## Do Blockcheck
 
 Find the DPI methods implemented by the ISP.
 
 > ```shell
+> # Run the test
 > ./blockcheck.sh
 > ```
+
+Questions that may arise at this time:
+
+> ```
+> specify domain(s) to test. multiple domains are space separated.
+> domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BANNED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
+>
+> ip protocol version(s) - 4, 6 or 46 for both (default: 4) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> check http (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> check https tls 1.2 (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> check https tls 1.3 (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> how many times to repeat each test (default: 1) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+>
+> quick - scan as fast as possible to reveal any working strategy
+> standard - do investigation what works on your DPI
+> force - scan maximum despite of result
+> 1 : quick
+> 2 : standard
+> 3 : force
+> your choice (default : standard) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
+> ```
+
+Wait for the test to finish. This may take a few minutes.
+
+After the process is finished, the test results will appear.
+
+Copy the latest setting from these results. Example:
+
+> ```
+> ipv4 discord.com curl_test_https_tls12 : nfqws --dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1
+>                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>                                                                                      MAKE A NOTE FOR IT
+> ```
+
+This is an example settings for `nfqws`. It may be different for each person. Make a note of it.
+
+```
+--dpi-desync=fakeddisorder --dpi-desync-ttl=1 --dpi-desync-autottl=5 --dpi-desync-split-pos=1
+```
