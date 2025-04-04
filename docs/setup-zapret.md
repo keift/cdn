@@ -137,7 +137,7 @@ Questions that may arise at this time:
 > ```shell
 > # 1
 > specify domain(s) to test. multiple domains are space separated.
-> domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BANNED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
+> domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BLOCKED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
 >
 > # 2
 > ip protocol version(s) - 4, 6 or 46 for both (default: 4) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
