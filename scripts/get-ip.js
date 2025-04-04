@@ -2,7 +2,7 @@
   Simple script to get user IP address.
   
   Use This Script:
-    <script src="//cdn.jsdelivr.net/gh/keift/cdn/getip52ac9cf8.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/keift/cdn/scripts/get-ip.js"></script>
   
   Example Usage:
     console.log("Your IP address: " + __ip_addr);
