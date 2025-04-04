@@ -109,6 +109,7 @@ Install the pre-installation requirements and prepare to perform a clean install
 >
 > # For a clean installation, remove any installation files that may be present in case an installation has been made before
 > ./uninstall_easy.sh
+> /opt/zapret/uninstall_easy.sh
 > sudo rm -rf /opt/zapret
 >
 > # Install requirements
