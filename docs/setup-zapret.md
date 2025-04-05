@@ -1,6 +1,6 @@
 # Setup Zapret to bypass DPI
 
-## 1- Keep Hosts content up to date
+## 1 - Keep Hosts content up to date
 
 If you have changed the hostname before, it may not have been updated in `/etc/hosts`. Correct this to avoid problems during installation.
 
@@ -9,7 +9,7 @@ If you have changed the hostname before, it may not have been updated in `/etc/h
 > sudo sed -i "s/^\(127\.0\.1\.1\s\+\)\S\+/\1$(hostname)/" /etc/hosts
 > ```
 
-## 2- Install Nslookup tool
+## 2 - Install Nslookup tool
 
 Tool required by Zapret to check DNS during installation.
 
@@ -25,7 +25,7 @@ Tool required by Zapret to check DNS during installation.
 > sudo pacman -S --noconfirm bind
 > ```
 
-## 3- Install Unzip tool
+## 3 - Install Unzip tool
 
 Essential tool for extracting zip files.
 
@@ -41,7 +41,7 @@ Essential tool for extracting zip files.
 > sudo pacman -S --noconfirm unzip
 > ```
 
-## 4- Change DNS rules
+## 4 - Change DNS rules
 
 Zapret only bypasses DPI restrictions. But it does not set up a DNS for us. We need to do that ourselves. We are using Yandex DNS here.
 
@@ -75,7 +75,7 @@ _If you want to undo this action you can do the following:_
 > sudo reboot
 > ```
 
-## 5- Install Zapret
+## 5 - Download Zapret
 
 Download the compiled zip file as release on GitHub.
 
@@ -87,7 +87,7 @@ Download the compiled zip file as release on GitHub.
 > wget https://github.com/bol-van/zapret/releases/download/v70.5/zapret-v70.5.zip
 > ```
 
-## 6- Unzip the file
+## 6 - Unzip the zip file
 
 Extract the zip file and then delete it.
 
@@ -99,7 +99,7 @@ Extract the zip file and then delete it.
 > rm -rf ./zapret-v70.5.zip
 > ```
 
-## 7- Prepare for setup
+## 7 - Prepare for setup
 
 Install the pre-installation requirements and prepare to perform a clean install.
 
@@ -127,7 +127,7 @@ Questions that may arise at this time:
 > your choice (default : nftables) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
-## 8- Do Blockcheck
+## 8 - Do Blockcheck
 
 Find the DPI methods implemented by the ISP.
 
@@ -199,7 +199,7 @@ This is an example settings for **nfqws**. It may be different for each person. 
 ```
 
 
-## 9- Install Zapret
+## 9 - Install Zapret
 
 Once everything is complete, we can start installing Zapret.
 
@@ -312,7 +312,7 @@ Let's continue with the questions:
 > your choice (default : none) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
-## 10- Finish the installation
+## 10 - Finish the installation
 
 All done! We are done with this folder of Zapret anymore. We can delete it.
 
