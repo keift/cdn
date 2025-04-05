@@ -120,7 +120,7 @@ Install the pre-installation requirements and prepare to perform a clean install
 Questions that may arise at this time:
 
 > ```shell
-> # FIRST QUESTION
+> # 1 - FIRST QUESTION
 > select firewall type :
 > 1 : iptables
 > 2 : nftables
@@ -139,38 +139,38 @@ Find the DPI methods implemented by the ISP.
 Questions that may arise at this time:
 
 > ```shell
-> # FIRST QUESTION
+> # 1 - FIRST QUESTION
 > specify domain(s) to test. multiple domains are space separated.
 > domain(s) (default: rutracker.org) : 🟥 [ENTER A WEBSITE DOMAIN NAME BLOCKED IN YOUR COUNTRY HERE - EXAMPLE: discord.com] 🟥
 > ```
 
 > ```shell
-> # SECOND QUESTION
+> # 2 - SECOND QUESTION
 > ip protocol version(s) - 4, 6 or 46 for both (default: 4) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # THIRD QUESTION
+> # 3 - THIRD QUESTION
 > check http (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # FOURTH QUESTION
+> # 4 - FOURTH QUESTION
 > check https tls 1.2 (default : Y) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # FIFTH QUESTION
+> # 5 - FIFTH QUESTION
 > check https tls 1.3 (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # SIXTH QUESTION
+> # 6 - SIXTH QUESTION
 > how many times to repeat each test (default: 1) : 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # SEVENTH QUESTION
+> # 7 - SEVENTH QUESTION
 > quick - scan as fast as possible to reveal any working strategy
 > standard - do investigation what works on your DPI
 > force - scan maximum despite of result
@@ -211,12 +211,12 @@ Once everything is complete, we can start installing Zapret.
 Questions that may arise at this time:
 
 > ```shell
-> # FIRST QUESTION
+> # 1 - FIRST QUESTION
 > do you want the installer to copy it for you (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
 > ```
 
 > ```shell
-> # SECOND QUESTION
+> # 2 - SECOND QUESTION
 > select firewall type :
 > 1 : iptables
 > 2 : nftables
@@ -224,12 +224,12 @@ Questions that may arise at this time:
 > ```
 
 > ```shell
-> # THIRD QUESTION
+> # 3 - THIRD QUESTION
 > enable ipv6 support (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # FOURTH QUESTION
+> # 4 - FOURTH QUESTION
 > select flow offloading :
 > 1 : none
 > 2 : software
@@ -238,22 +238,22 @@ Questions that may arise at this time:
 > ```
 
 > ```shell
-> # FIFTH QUESTION
+> # 5 - FIFTH QUESTION
 > enable tpws socks mode on port 987 ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # SIXTH QUESTION
+> # 6 - SIXTH QUESTION
 > enable tpws transparent mode ? (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # SEVENTH QUESTION
+> # 7 - SEVENTH QUESTION
 > enable nfqws ? (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
 > ```
 
 > ```shell
-> # EIGHTH QUESTION
+> # 8 - EIGHTH QUESTION
 > do you want to edit the options (default : N) (Y/N) ? 🟥 [TYPE "Y"] 🟥
 > ```
 
@@ -278,12 +278,12 @@ Then save with **CTRL + S** and close with **CTRL + X**.
 Let's continue with the questions:
 
 > ```shell
-> # EIGHTH QUESTION
+> # 8 - EIGHTH QUESTION
 > do you want to edit the options (default : N) (Y/N) ? 🟩 [LEAVE THIS QUESTION BLANK] 🟩
 > ```
 
 > ```shell
-> # NINTH QUESTION
+> # 9 - NINTH QUESTION
 > LAN interface :
 > 1 : NONE
 > 2 : docker0
@@ -293,7 +293,7 @@ Let's continue with the questions:
 > ```
 
 > ```shell
-> # TENTH QUESTION
+> # 10 - TENTH QUESTION
 > WAN interface :
 > 1 : ANY
 > 2 : docker0
@@ -303,7 +303,7 @@ Let's continue with the questions:
 > ```
 
 > ```shell
-> # ELEVENTH QUESTION
+> # 11 - ELEVENTH QUESTION
 > select filtering :
 > 1 : none
 > 2 : ipset
