@@ -8,9 +8,9 @@
     console.log("Your IP address: " + __ip_addr);
 */
 
-let __ip_addr = "0.0.0.0";
+let __ip_addr = '0.0.0.0';
 const __updateIPADDR = () => {
-  fetch("//api64.ipify.org").then(async (a) => {
+  fetch('//api64.ipify.org').then(async (a) => {
     __ip_addr = await a.text();
   });
 };

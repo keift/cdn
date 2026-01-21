@@ -1,11 +1,8 @@
 var searchParams = new URLSearchParams(location.search);
 function randomSymbol(e, t) {
-  let i = "",
-    o = "";
-  (t.indexOf("a") > -1 && (i += "abcdefghijklmnoprstuvyzwxq"),
-    t.indexOf("A") > -1 && (i += "ABCDEFGHIJKLMNOPRSTUVYZWXQ"),
-    t.indexOf("0") > -1 && (i += "0123456789"),
-    t.indexOf("_") > -1 && (i += "&%@$#*!_."));
+  let i = '',
+    o = '';
+  (t.indexOf('a') > -1 && (i += 'abcdefghijklmnoprstuvyzwxq'), t.indexOf('A') > -1 && (i += 'ABCDEFGHIJKLMNOPRSTUVYZWXQ'), t.indexOf('0') > -1 && (i += '0123456789'), t.indexOf('_') > -1 && (i += '&%@$#*!_.'));
   for (let r = e; r > 0; r--) o += i[Math.floor(Math.random() * i.length)];
   return o;
 }
@@ -14,7 +11,7 @@ function blinkTitle(e) {
     !(function t() {
       ((document.title = e),
         setTimeout(() => {
-          ((document.title = "6dcode"),
+          ((document.title = '6dcode'),
             setTimeout(() => {
               t();
             }, 2e3));
@@ -23,10 +20,10 @@ function blinkTitle(e) {
   }, 1e3);
 }
 function startTimer(e) {
-  ($("#timer").css({ display: "inline" }),
+  ($('#timer').css({ display: 'inline' }),
     !(function t() {
-      ((document.title = "Please wait for " + e + " seconds"),
-        $("#timer").text("Please wait for " + e + " seconds"),
+      ((document.title = 'Please wait for ' + e + ' seconds'),
+        $('#timer').text('Please wait for ' + e + ' seconds'),
         e--,
         setTimeout(() => {
           0 !== e && t();
@@ -34,34 +31,19 @@ function startTimer(e) {
     })());
 }
 $(function () {
-  if (
-    (history.pushState("", "", "/?code=" + randomSymbol(256, "aA0")),
-    $("#cookieChoiceInfo").remove(),
-    searchParams.get("code"))
-  ) {
+  if ((history.pushState('', '', '/?code=' + randomSymbol(256, 'aA0')), $('#cookieChoiceInfo').remove(), searchParams.get('code'))) {
     try {
-      base64.decode(searchParams.get("code"));
+      base64.decode(searchParams.get('code'));
     } catch (e) {
-      (blinkTitle("Error 6 Digit Code"),
-        $("#title").text("Error 6 Digit Code"));
+      (blinkTitle('Error 6 Digit Code'), $('#title').text('Error 6 Digit Code'));
     }
-    isNaN(base64.decode(searchParams.get("code"))) ||
-    6 !== base64.decode(searchParams.get("code")).length
-      ? (blinkTitle("Error 6 Digit Code"),
-        $("#title").text("Error 6 Digit Code"))
-      : ($("#title").text("Your 6 Digit Code"),
-        $("#code").css({ display: "inline" }),
+    isNaN(base64.decode(searchParams.get('code'))) || 6 !== base64.decode(searchParams.get('code')).length
+      ? (blinkTitle('Error 6 Digit Code'), $('#title').text('Error 6 Digit Code'))
+      : ($('#title').text('Your 6 Digit Code'),
+        $('#code').css({ display: 'inline' }),
         startTimer(10),
         setTimeout(() => {
-          ((document.title =
-            "Your 6 Digit Code: " + base64.decode(searchParams.get("code"))),
-            blinkTitle(
-              "Your 6 Digit Code: " + base64.decode(searchParams.get("code")),
-            ),
-            $("#code").text(base64.decode(searchParams.get("code"))),
-            $("#code").css({ "user-select": "auto" }),
-            $("#timer").css({ display: "none" }));
+          ((document.title = 'Your 6 Digit Code: ' + base64.decode(searchParams.get('code'))), blinkTitle('Your 6 Digit Code: ' + base64.decode(searchParams.get('code'))), $('#code').text(base64.decode(searchParams.get('code'))), $('#code').css({ 'user-select': 'auto' }), $('#timer').css({ display: 'none' }));
         }, 1e4));
-  } else
-    (blinkTitle("Error 6 Digit Code"), $("#title").text("Error 6 Digit Code"));
+  } else (blinkTitle('Error 6 Digit Code'), $('#title').text('Error 6 Digit Code'));
 });
