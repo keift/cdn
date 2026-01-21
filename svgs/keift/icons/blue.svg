@@ -1,0 +1,31 @@
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="svg464258" version="1.1" viewBox="215.6 18.93 593.68 730.18">
+  <metadata id="metadata464264">
+    <rdf:rdf>
+      <cc:work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+      </cc:work>
+    </rdf:rdf>
+  </metadata>
+  <defs id="defs464262"/>
+  <linearGradient spreadMethod="pad" y2="30%" x2="-10%" y1="120%" x1="30%" id="3d_gradient2-logo-aed3976a-49fc-44fb-b7c4-11496390f167">
+    <stop id="stop464239" stop-opacity="1" stop-color="#ffffff" offset="0%"/>
+    <stop id="stop464241" stop-opacity="1" stop-color="#000000" offset="100%"/>
+  </linearGradient>
+  <linearGradient gradientTransform="rotate(-30)" spreadMethod="pad" y2="30%" x2="-10%" y1="120%" x1="30%" id="3d_gradient3-logo-aed3976a-49fc-44fb-b7c4-11496390f167">
+    <stop id="stop464244" stop-opacity="1" stop-color="#ffffff" offset="0%"/>
+    <stop id="stop464246" stop-opacity="1" stop-color="#cccccc" offset="50%"/>
+    <stop id="stop464248" stop-opacity="1" stop-color="#000000" offset="100%"/>
+  </linearGradient>
+  <g id="logo-group">
+    <image xlink:href="" id="container" x="272" y="144" width="480" height="480" style="display: none;" transform="translate(0 0)"/>
+    <g id="logo-center" transform="translate(0 0)">
+      <image xlink:href="" id="icon_container" style="display: none;" x="0" y="0"/>
+      <g id="slogan" style="font-style:normal;font-weight:normal;font-size:32px;line-height:1;font-family:Boogaloo;font-variant-ligatures:none;text-align:center;text-anchor:middle" transform="translate(230 0)"/>
+      <g id="title" style="font-style:normal;font-weight:700;font-size:72px;line-height:1;font-family:'Brandmark1 Bold Color';font-variant-ligatures:normal;text-align:center;text-anchor:middle" transform="translate(0 0)">
+        <g id="path464267" aria-label="K" transform="translate(0 612.6400000000001) translate(215.75599999999997 -593.6800000000001) scale(13) translate(-492.54256 53.64)"> <polygon class="c1" points="108.10376,71.91748 88.48218,95.62207 88.48218,71.91748 77.17749,71.91748 77.17749,128.08252 88.48218,128.08252 88.48218,112.30518 122.80005,71.91748 " transform="translate(415.36507 -125.55748)" stroke-width="0" stroke-linejoin="miter" stroke-miterlimit="2" fill="#0074ff" stroke="#0074ff"/> <polygon class="c3" points="112.71143,114.24286 98.67279,114.24286 108.73071,128.08252 122.82251,128.08252 " transform="translate(415.36507 -125.55748)" stroke-width="0" stroke-linejoin="miter" stroke-miterlimit="2" fill="#0074ff" stroke="#0074ff"/> </g>
+       </g>
+      <image xlink:href="https://app.brandmark.io/nounpreview/33958.png" id="icon" style="display: none;" x="0" y="0"/>
+    </g>
+  </g>
+</svg>
